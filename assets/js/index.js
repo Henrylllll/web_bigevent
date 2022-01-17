@@ -11,6 +11,7 @@ $(function(){
             //do something
             //1.清空本地存储中的那个token
             localStorage.removeItem('token')
+            localStorage.removeItem('username')
             //2.重新跳转到登录页面
             location.href='/login.html'
             //关闭confirm询问框

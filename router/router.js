@@ -41,28 +41,65 @@ router.post('/api/login',function (req,res){
         res.send({
             status:0,
             token:'You can access!',
-            message:'登陆成功！'
+            message:'登陆成功！',
+            username:data[0].username
         });
       }
     })
 })
 
 router.get('/my/userinfo',function(req,res){
-    if(req.query.Authorization==='You can access!'){
-        res.send({
-            status:0,
-            user:{
-                nickname:'zs',
-                username:'ls',
-                user_pic:'/assets/images/avatar.jpg'
-            }
-        })
-    }else{
-        res.send({
-            status:-1,
-            message:'身份认证失败！'
-        })
-    }
+    var sql='SELECT * FROM userinfo where username='+"'"+req.query.username+"';"
+    db.query(sql,function(err,data){
+        if(req.query.Authorization==='You can access!'){
+            res.send({
+                status:0,
+                user:{
+                    nickname:data[0].nickname,
+                    username:data[0].username,
+                    user_pic:data[0].user_pic
+                },
+                data:{
+                    id:data[0].id,
+                    username:data[0].username,
+                    nickname:data[0].nickname,
+                    email:data[0].email,
+                    user_pic:data[0].user_pic
+                }
+            })
+        }else{
+            res.send({
+                status:-1,
+                message:'身份认证失败！'
+            })
+        }
+    })
+})
+
+router.post('/my/userinfo',function(req,res){
+    var sql1='update userinfo set nickname='+"'"+req.body.nickname+"'"+' where username='+"'"+req.query.username+"';"
+    var sql2='update userinfo set email='+"'"+req.body.email+"'"+' where username='+"'"+req.query.username+"';"
+    db.query(sql1)
+    db.query(sql2)
+    res.send({
+        status:0
+    })
+})
+
+router.post('/my/updatepwd',function(req,res){
+    var sql='update users set password='+"'"+req.body.newPwd+"'"+' where username='+"'"+req.query.username+"';"
+    db.query(sql)
+    res.send({
+        status:0
+    })
+})
+
+router.post('/my/update/avatar',function(req,res){
+    var sql='update userinfo set user_pic='+"'"+req.body.avatar+"'"+' where username='+"'"+req.query.username+"';"
+    db.query(sql)
+    res.send({
+        status:0
+    })
 })
 
 module.exports = router

@@ -7,7 +7,7 @@ $.ajaxPrefilter(function(options){
 
     //统一为有权限的接口，设置headers请求头
     if(options.url.indexOf('/my/')!==-1){
-        options.url=options.url+'?Authorization='+localStorage.getItem('token')||''
+        options.url=options.url+'?Authorization='+localStorage.getItem('token')+'&username='+localStorage.getItem('username')
     }
 
     //全局统一挂载complete回调函数

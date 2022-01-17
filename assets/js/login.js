@@ -62,6 +62,7 @@ $(function(){
                 layer.msg(res.message)
                 //将登录成功得到的token字符串保存到localStorage中
                 localStorage.setItem('token',res.token)
+                localStorage.setItem('username',res.username)
                 // 跳转到后台主页
                 location.href='/index.html'
             }
