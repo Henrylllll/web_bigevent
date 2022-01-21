@@ -102,4 +102,84 @@ router.post('/my/update/avatar',function(req,res){
     })
 })
 
+router.get('/my/article/cates',function(req,res){
+    res.send({
+        status:0,
+        message:'获取文章分类列表成功',
+        data:[
+            {Id:1,name:'最新',alias:'ZuiXin',is_delete:0},
+            {Id:2,name:'科技',alias:'KeJi',is_delete:0},
+            {Id:3,name:'股市',alias:'GuShi',is_delete:0},
+            {Id:4,name:'历史',alias:'LiShi',is_delete:0},
+            {Id:5,name:'情感',alias:'QingGan',is_delete:0}
+        ]
+    })
+})
+
+router.post('/my/article/addcates',function(req,res){
+    res.send({
+        status:0
+    })
+})
+
+router.get('/my/article/deletecate',function(req,res){
+    res.send({
+        status:0
+    })
+})
+
+router.get('/my/article/list',function(req,res){
+    res.send({
+        status:0,
+        data:[
+            {
+                Id:1,
+                title:'abab',
+                pub_date:Date(),
+                state:'已发布',
+                cate_name:'最新'
+            },
+            {
+                Id:2,
+                title:'666',
+                pub_date:Date(),
+                state:'已发布',
+                cate_name:'股市'
+            },{
+                Id:3,
+                title:'哈哈',
+                pub_date:Date(),
+                state:'已发布',
+                cate_name:'科技'
+            },{
+                Id:4,
+                title:'笑笑',
+                pub_date:Date(),
+                state:'已发布',
+                cate_name:'历史'
+            },{
+                Id:5,
+                title:'smile',
+                pub_date:Date(),
+                state:'已发布',
+                cate_name:'情感'
+            }
+        ],
+        total:5
+    })
+})
+
+router.get('/my/article/delete',function(req,res){
+    res.send({
+        status:0,
+    })
+})
+
+router.post('/my/article/add',function(req,res){
+    console.log(req.body)
+    res.send({
+        status:0
+    })
+})
+
 module.exports = router
